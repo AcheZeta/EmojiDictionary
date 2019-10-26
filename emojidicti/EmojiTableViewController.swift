@@ -52,9 +52,25 @@ class EmojiTableViewController: UITableViewController {
         //3. regresar celda
         return cell
     }
+    // Esta función me permite mover de pocisiones
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        let emojiToMove = emojis.remove(at: sourceIndexPath.row)
+        emojis.insert(emojiToMove, at: destinationIndexPath.row)
+        tableView.reloadData()
+    }
     
-    // Delegate Methods.
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(emoji[indexPath.row].symbol)")
+    // Esta función me permite agregar que estilo quiero al editar (none, delete, insert)
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    // y que / como se va a hacer
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            emojis.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.reloadData()
+        }
     }
 }
