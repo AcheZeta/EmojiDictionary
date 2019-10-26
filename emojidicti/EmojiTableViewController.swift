@@ -28,11 +28,9 @@ class EmojiTableViewController: UITableViewController {
         Emoji(symbol: "🤒", name: "Sick face", description: "A face when you are sick", usage: "sickness")
     ]
     
-    override func 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        navigationItem.leftBarButtonItem = editButtonItem
     }
     
     //Mark - Data Source methods
@@ -57,6 +55,6 @@ class EmojiTableViewController: UITableViewController {
     
     // Delegate Methods.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\emoji[indexPath.row].symbol")
+        print("\(emoji[indexPath.row].symbol)")
     }
 }
